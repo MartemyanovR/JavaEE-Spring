@@ -11,18 +11,19 @@
   <context:component-scan base-package="com.baeldung.applicationcontext"/>
   <context:property-placeholder location="classpath:musicPlayer.properties"/>
 	
+	<!-- использование scope, innit destroy meth и factory -->
 		<bean id="musicBeanPop" class="test_Package.PopMusic">
 		</bean>
-		<bean id="musicBeanClassical" scope="prototype" class="test_Package.ClassicalMusic"
+		<bean id="musicBeanClassical" scope="singleton" class="test_Package.ClassicalMusic"
 			init-method="doMyInit" 
 			destroy-method="doMyDestroy"
 			factory-method="getlassicalMusic">
-		</bean>
+		</bean> 
 		<bean id="musicBeanRock" class="test_Package.RockMusic">		
-		</bean>
+		</bean> 
 		
 			
-		<!-- использовани колекции и ее инициализация 
+		<!-- использовани колекции и ее инициализация	
 		<bean id="musicPlayer" class="test_Package.MusicPlayer">		
 			<property name="listMusic">
 				<list> 
@@ -31,7 +32,7 @@
 					<ref bean="musicBeanClassical"/>
 				</list>		
 			</property>	
-		</bean> 	-->		
+		</bean> 		 -->
 		
 		<!-- использование конструктора и установка значений параметров вручную	
 		<bean id="musicPlayer" class="test_Package.MusicPlayer">		
@@ -41,11 +42,11 @@
 			<property name="vol" value="30"></property>
 		</bean>   -->
 	
-		<!-- использование сетера и установка значений параметров через prorerty file	 
+		<!--  использование сетера и установка значений параметров через prorerty file	
 		<bean id="musicPlayer" class="test_Package.MusicPlayer">		
-			<property name = "music"  ref="musicBeanRock"/>  	
+			<property name = "musik"  ref="musicBeanPop"/>  	
 			<property name = "name"  value="${musicPlayer.name}"/>
 			<property name = "vol"  value="${musicPlayer.vol}"/>
-		</bean>  -->
+		</bean>   -->
 			
 </beans>

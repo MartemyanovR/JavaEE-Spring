@@ -4,7 +4,7 @@ public class ClassicalMusic implements Music {
 	private static int count = 0;
 	
 	
-	
+	//ФМ, при prototype создается один раз
 	public static ClassicalMusic getlassicalMusic() {
 		System.out.println("Start factory method: count = " + (++count) );
 		return new ClassicalMusic();

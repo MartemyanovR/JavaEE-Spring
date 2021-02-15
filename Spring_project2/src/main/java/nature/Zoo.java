@@ -10,12 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class Zoo {
 		
-//	@Autowired
-//	@Qualifier("cat")
+/*	@Autowired
+	@Qualifier("cat")*/
 	private Animals dog;
 	private Animals cat;
-	
-
 	private Animals bird;	
 	
 	@Value(value = "${nameZoo}")
@@ -35,11 +33,14 @@ public class Zoo {
 			
 	}
 	
-	
+/*	@Autowired	
+	public Zoo(@Qualifier("dogi") Animals a) {
+		this.dog = a;
+	}*/
 	
 	public String askMe() {
-		return dog.volume() + " " + 
-				" " + cat.volume() +  " " +  bird.volume();
+		return cat.volume() ; /*dog.volume(); + " " + 
+				" " + cat.volume() +  " " +  bird.volume();*/
 	}
 	
 	public String moveMe(ChooseAnimal choose) {
@@ -56,9 +57,9 @@ public class Zoo {
 	}
 
 /*	//c Autowired название метода не имее значение
-//	@Autowired
-	public Animals setAnimals(Animals animal) {
-		this.animal = animal;
+	@Autowired
+	public Animals setAnimals(@Qualifier("cat") Animals animal) {
+		this.cat = animal;
 		return animal;
 	}
 	*/

@@ -1,6 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -37,10 +40,12 @@ public class AddUserServlet extends HttpServlet {
 		final String name = request.getParameter("name");
 		final String age = request.getParameter("age");	
 		
+		
 		if(Utils.requestValid(request,name,age)) {						
 			final int id = this.id.getAndIncrement();
 			final User user = Utils.createStubUser(id,name, Integer.valueOf(age));
 			users.put(id, user);
+					
 		}
 		
 		//этот метод отправляет клиенту в браузер  что необходимо сделать новый запрос 
