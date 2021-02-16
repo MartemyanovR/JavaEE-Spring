@@ -10,5 +10,7 @@
 	<!-- переход на метод showD в PeopleController для получения id person -->
 	<a  th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">user</a>
 	</div>
+	<br/>
+	<a th:href="@{/people/new}">Add person</a>
 </body>
 </html>

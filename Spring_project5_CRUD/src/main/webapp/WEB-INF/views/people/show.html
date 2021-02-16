@@ -3,10 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>People</title>
+<style>
+   dt {
+    float: left; /* Для размещения на одной строке */
+    width: 100px; /* Ширина для текста */
+    text-align: right; /* Выравнивание по правому краю */
+    padding-right: 5px; /* Отступ справа */
+    min-height: 1px; /* Минимальная высота */
+	}   
+  </style>
 </head>
 <body>
-	<p th:text="${person.getName()}">VALUE</p>
-	<p th:text="${person.getId()}">VALUE</p>
-	
+	<dl>
+		<dt th:text="${person.getName()}">VALUE1 </dt>
+		<dt th:text="${person.getSurname()}">VALUE2</dt>
+		<dt th:text="${person.getEmail()}">VALUE3</dt>
+		<dt th:text="${person.getId()}">VALUE4</dt>
+	</dl>
 </body>
 </html>

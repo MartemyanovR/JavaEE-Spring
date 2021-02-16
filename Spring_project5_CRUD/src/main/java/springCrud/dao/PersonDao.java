@@ -16,10 +16,10 @@ public class PersonDao {
 	
 	public PersonDao() {
 		peoples = new ArrayList<>();
-		peoples.add(new Person(++COUNT, "Alex"));
-		peoples.add(new Person(++COUNT, "Emma"));
-		peoples.add(new Person(++COUNT, "Tom"));
-		peoples.add(new Person(++COUNT, "Jenna"));		
+		peoples.add(new Person(++COUNT, "Alex", "Petrov", "123@mail.ru"));
+		peoples.add(new Person(++COUNT, "Emma", "Fuga", "emma@gmail.ru"));
+		peoples.add(new Person(++COUNT, "Tom", "Jeckson", "jek@yandex.ru"));
+		peoples.add(new Person(++COUNT, "Jenna", "Smit", "smit@rambler.ru"));		
 	}
 	
 	public List<Person> index() {
@@ -33,6 +33,11 @@ public class PersonDao {
 			}
 		}		
 		return null;
+	}
+	
+	public void save(Person person) {
+		person.setId(++COUNT);
+		peoples.add(person);
 	}
 	
 	
