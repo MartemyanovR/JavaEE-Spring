@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" 
+        codebase="file:///C:/java/eclipse-workspace/Test1/javawsTest/horstmann/"
+        href="JWST.jnlp">
+    <information>
+        <title>Demo</title>
+        <vendor>Dynamic Team</vendor>
+    </information>
+    <resources>
+        <!-- Application Resources -->
+        <j2se version="1.8.0+"/>              
+        <jar href="JavawsTest.jar" main="true" />
+    </resources>
+    <application-desc
+         name="Dynamic Tree Demo Application"
+         main-class="horstmann.Main">
+     </application-desc>
+     <update check="background"/>
+</jnlp>
