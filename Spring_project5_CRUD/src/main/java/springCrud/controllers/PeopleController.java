@@ -1,13 +1,19 @@
 package springCrud.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 import springCrud.dao.PersonDao;
 import springCrud.models.Person;
@@ -19,8 +25,7 @@ public class PeopleController {
 	private final PersonDao personDao;
 	
 	//DI
-	public PeopleController(PersonDao personDao) {
-		
+	public PeopleController(PersonDao personDao) {		
 		this.personDao = personDao;
 	}
 
@@ -34,7 +39,7 @@ public class PeopleController {
 	}
 	
 	/*
-	 * получим  одноого человека из дао и передадим на  отображение в представление
+	 * получим  одного человека из дао и передадим на  отображение в представление
 	 */
 	@GetMapping("/{id}")
 	public String show(@PathVariable("id") int id, Model model) {
@@ -50,13 +55,16 @@ public class PeopleController {
 	}	*/
 	//так же можно использовать @ModelAttribute
 	@GetMapping("/new")
-	public String newPerson(@ModelAttribute("person") Person person) {
-			
+	public String newPerson(@ModelAttribute("person") Person person) {			
 		return "/people/new";
 	}	
 	
 	@PostMapping //по запросу "/people" мы попадаем в данный метод
-	public String create(@ModelAttribute("person") Person person) {  //получаем данные из формы , создаем обьект person, и заполняем поля
+	public String create(@ModelAttribute("person") @Valid Person person, BindingResult binding) {  //получаем данные из формы , создаем обьект person, и заполняем поля
+		if(binding.hasErrors()) {
+			System.out.println("EEERRRORR");
+			return "/people/new";
+		}
 		personDao.save(person);  //добавление в бд
 		
 		return "redirect:/people";  //переход на старницу после передачи значений полям обьекта person
@@ -78,9 +86,29 @@ public class PeopleController {
 	} */
 	
 	
+	//создаем страницу для обновления человека
+	//данный метод возвращает страницу для редактирования человека
+	@GetMapping("/{id}/edit")
+	public String edit(Model model, @PathVariable("id") int id) {
+		model.addAttribute("person", personDao.show(id));	
+		return "/people/edit";
+	}
 	
+	//ищем нужного человека и меняем значения
+	@PatchMapping("/{id}")
+	public String update(@ModelAttribute("person") @Valid Person person, BindingResult binding, @PathVariable("id") int id) {
+		if(binding.hasErrors()) {
+			return "/people/new";
+		}		
+		personDao.update(id,person);
+		return "redirect:/people";
+	}
 	
-	
+	@DeleteMapping("/{id}")
+	public String delete(@PathVariable("id") int id) {
+		personDao.delete(id);
+		return "redirect:/people";
+	}
 	
 	
 	

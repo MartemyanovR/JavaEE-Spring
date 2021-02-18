@@ -17,8 +17,17 @@
 	<dl>
 		<dt th:text="${person.getName()}">VALUE1 </dt>
 		<dt th:text="${person.getSurname()}">VALUE2</dt>
-		<dt th:text="${person.getEmail()}">VALUE3</dt>
-		<dt th:text="${person.getId()}">VALUE4</dt>
+		<dt th:text="${person.getAge()}">VALUE3</dt>
+		<dt th:text="${person.getEmail()}">VALUE4</dt>	
+		<dt th:text="${person.getId()}">VALUE5</dt>
 	</dl>
+	<br/>
+	<hr/>
+	<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit</a>
+	
+	<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+		<input type="submit" value="Delete">	
+	</form> 
+	
 </body>
 </html>
