@@ -11,8 +11,7 @@ import springCrud.models.Person;
 public class PersonDao {
 	
 	private static int COUNT;
-	private List<Person> peoples;
-	
+	private List<Person> peoples;	
 	
 	public PersonDao() {
 		peoples = new ArrayList<>();

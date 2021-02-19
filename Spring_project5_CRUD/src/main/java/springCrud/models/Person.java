@@ -13,16 +13,17 @@ public class Person {
 	@NotNull
 	@Size(min = 2, max = 15 , message = "Name should be between 2 and 30 characters")	
 	private String name;
-	
-	@Min(value = 0, message = "Age should be greater than 0")
-	private int age;
-	
+		
 	@NotNull(message="Not empty")
 	@Size(min = 2, max = 20 , message = "Name should be between 2 and 30 characters")
 	private String surname;
 	
+
+	@Min(value = 0, message = "Age should be greater than 0")
+	private int age;
+	
 	@NotNull(message="Not empty")
-	@Email(message = "Email should be valid")
+	@javax.validation.constraints.Email(message = "Email should be valid")
 	private String email;
 	
 	public Person() {

@@ -24,5 +24,11 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_202/jre/lib/ext/h2-1.4.200.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
