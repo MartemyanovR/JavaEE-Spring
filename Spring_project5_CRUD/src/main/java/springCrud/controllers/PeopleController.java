@@ -17,15 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import springCrud.dao.PersonDao;
 import springCrud.models.Person;
+import springCrud.service.PersonService;
 
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
 	
-	private final PersonDao personDao;
+	private final PersonService personDao;
 	
 	//DI
-	public PeopleController(PersonDao personDao) {		
+	public PeopleController(PersonService personDao) {		
 		this.personDao = personDao;
 	}
 
@@ -34,7 +35,7 @@ public class PeopleController {
 	 */
 	@GetMapping()
 	public String index(Model model) {
-		model.addAttribute("peoples", personDao.index());
+		model.addAttribute("peoples", personDao.getAllPeople());
 		return "/people/index";
 	}
 	
@@ -43,7 +44,7 @@ public class PeopleController {
 	 */
 	@GetMapping("/{id}")
 	public String show(@PathVariable("id") int id, Model model) {
-		model.addAttribute("person", personDao.show(id));
+		model.addAttribute("person", personDao.getById(id));
 		return "/people/show";
 	}
 	
@@ -62,10 +63,9 @@ public class PeopleController {
 	@PostMapping //по запросу "/people" мы попадаем в данный метод
 	public String create(@ModelAttribute("person") @Valid Person person, BindingResult binding) {  //получаем данные из формы , создаем обьект person, и заполняем поля
 		if(binding.hasErrors()) {
-			System.out.println("EEERRRORR");
 			return "/people/new";
 		}
-		personDao.save(person);  //добавление в бд
+		personDao.addPerson(person);  //добавление в бд
 		
 		return "redirect:/people";  //переход на старницу после передачи значений полям обьекта person
 	}	
@@ -90,7 +90,7 @@ public class PeopleController {
 	//данный метод возвращает страницу для редактирования человека
 	@GetMapping("/{id}/edit")
 	public String edit(Model model, @PathVariable("id") int id) {
-		model.addAttribute("person", personDao.show(id));	
+		model.addAttribute("person", personDao.getById(id));	
 		return "/people/edit";
 	}
 	
@@ -106,7 +106,7 @@ public class PeopleController {
 	
 	@DeleteMapping("/{id}")
 	public String delete(@PathVariable("id") int id) {
-		personDao.delete(id);
+		personDao.remove(id);
 		return "redirect:/people";
 	}
 	

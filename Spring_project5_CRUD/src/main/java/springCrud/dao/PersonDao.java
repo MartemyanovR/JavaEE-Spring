@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import springCrud.models.Person;
 
-@Component
+//@Component
 public class PersonDao {
 	
 	private static int COUNT;

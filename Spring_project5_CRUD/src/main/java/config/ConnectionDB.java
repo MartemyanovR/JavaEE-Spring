@@ -9,9 +9,13 @@ import java.util.Objects;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import springCrud.dao.PersonSQLDAO;
 
+@Component
+@Scope("singleton")
 public class ConnectionDB {
 	private String url;
 	private String user;
@@ -20,9 +24,8 @@ public class ConnectionDB {
 	private Connection connection;
 	private static ConnectionDB connectionDB;
     private static final Logger log = Logger.getLogger(ConnectionDB.class);
-
 	
-	private ConnectionDB() {	}
+	public ConnectionDB() {	}
 
 	public static ConnectionDB getInstance() {
 		if(connectionDB == null) {
@@ -46,19 +49,21 @@ public class ConnectionDB {
 	
 	public Connection getConnection() {
 		if(url == null && user == null && password == null && driver == null) {
+			System.out.println("1");
 			init();
 		}
 		try {
 			Class.forName(driver);
-			DriverManager.getConnection(url, user, password);
+			connection = DriverManager.getConnection(url, user, password);
 			log.info("Connection successful");
 			System.out.println("Connection successful");
 			return connection;
 		} catch(SQLException e) {
-			log.error("Error loafing JDBC driver", e);
+			log.error("Error loading JDBC driver", e);
 		} catch(ClassNotFoundException e) {
 			log.error("jdbs driver class not found", e);
-		}
+		}		
+		System.out.println("2");
 		return null;
 	}
 

@@ -10,19 +10,19 @@ public interface PersonSQLDAO {
 	void addTable();
 
 	//create
-	void add(Person person);
+	void addPerson(Person person);
 	
 	//read
-	List<Person> getAll();
+	List<Person> getAllPeople();
 	
 	//get by id
 	Person getById(int id);
 	
 	//update
-	void update(Person person);	
+	void update(int id, Person person);	
 	
 	//remove
-	void remove(Person person);
+	void remove(int id);
 	
 	//add first default person
 	void firstPerson();
