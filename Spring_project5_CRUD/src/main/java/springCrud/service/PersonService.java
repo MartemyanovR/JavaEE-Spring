@@ -16,7 +16,7 @@ import config.ConnectionDB;
 import springCrud.dao.PersonSQLDAO;
 import springCrud.models.Person;
 
-@Component
+//@Component
 public class PersonService implements PersonSQLDAO {
 	private static int COUNT_PERSON = 0;
 	private String tablePerson = "Person"; 

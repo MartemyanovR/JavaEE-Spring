@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 
 import springCrud.dao.PersonSQLDAO;
 
-@Component
-@Scope("singleton")
+//@Component
+//@Scope("singleton")
 public class ConnectionDB {
 	private String url;
 	private String user;

@@ -23,10 +23,11 @@ import springCrud.service.PersonService;
 @RequestMapping("/people")
 public class PeopleController {
 	
-	private final PersonService personDao;
+	//private final PersonService personDao;
+	private final PersonDao personDao;
 	
 	//DI
-	public PeopleController(PersonService personDao) {		
+	public PeopleController(PersonDao personDao) {		
 		this.personDao = personDao;
 	}
 
@@ -35,7 +36,7 @@ public class PeopleController {
 	 */
 	@GetMapping()
 	public String index(Model model) {
-		model.addAttribute("peoples", personDao.getAllPeople());
+		model.addAttribute("peoples", personDao.index());
 		return "/people/index";
 	}
 	
@@ -44,7 +45,7 @@ public class PeopleController {
 	 */
 	@GetMapping("/{id}")
 	public String show(@PathVariable("id") int id, Model model) {
-		model.addAttribute("person", personDao.getById(id));
+		model.addAttribute("person", personDao.show(id));
 		return "/people/show";
 	}
 	
@@ -65,7 +66,7 @@ public class PeopleController {
 		if(binding.hasErrors()) {
 			return "/people/new";
 		}
-		personDao.addPerson(person);  //добавление в бд
+		personDao.save(person);  //добавление в бд
 		
 		return "redirect:/people";  //переход на старницу после передачи значений полям обьекта person
 	}	
@@ -90,7 +91,7 @@ public class PeopleController {
 	//данный метод возвращает страницу для редактирования человека
 	@GetMapping("/{id}/edit")
 	public String edit(Model model, @PathVariable("id") int id) {
-		model.addAttribute("person", personDao.getById(id));	
+		model.addAttribute("person", personDao.show(id));	
 		return "/people/edit";
 	}
 	

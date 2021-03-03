@@ -3,52 +3,50 @@ package springCrud.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import springCrud.models.Person;
+import springCrud.service.PersonMapper;
 
-//@Component
+@Component
 public class PersonDao {
 	
-	private static int COUNT;
-	private List<Person> peoples;	
-	
-	public PersonDao() {
-		peoples = new ArrayList<>();
-		peoples.add(new Person(++COUNT, "Alex", "Petrov", 32, "123@mail.ru"));
-		peoples.add(new Person(++COUNT, "Emma", "Fuga", 25, "emma@gmail.ru"));
-		peoples.add(new Person(++COUNT, "Tom", "Jeckson",71, "jek@yandex.ru"));
-		peoples.add(new Person(++COUNT, "Jenna", "Smit",15, "smit@rambler.ru"));		
+	private static int COUNT = 1;
+	private JdbcTemplate jdbcTemplate;
+		
+	@Autowired
+	public PersonDao(JdbcTemplate jdbcTemplate)  {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 	
 	public List<Person> index() {
-		return peoples;
+		jdbcTemplate.query("SELECT MAX(id) FROM PERSON",new PersonMapper(),COUNT);
+		System.out.println(COUNT);
+		return jdbcTemplate.query("SELECT * FROM Person", new BeanPropertyRowMapper<Person>(Person.class));
 	}
+	
 	
 	public Person show(int id) {
-		for(Person p : peoples) {
-			if(p.getId()==id) {
-				return p;
-			}
-		}		
-		return null;
+		return jdbcTemplate.query("SELECT * FROM Person WHERE id = ?",new PersonMapper(), new Object[] {id})
+				.stream().findAny().orElse(null);
 	}
 	
-	public void save(Person person) {
-		person.setId(++COUNT);
-		peoples.add(person);
+	public void save(Person person) {		
+		jdbcTemplate.update("INSERT INTO Person VALUES(?,?,?,?,?)", COUNT++, person.getName(), person.getSurname(),
+				person.getAge(), person.getEmail());
 	}
 
-	public void update(int id, Person updatedPerson) {
-		Person personToBeUpdated = show(id);
-		personToBeUpdated.setName(updatedPerson.getName());
-		personToBeUpdated.setSurname(updatedPerson.getSurname());
-		personToBeUpdated.setAge(updatedPerson.getAge());
-		personToBeUpdated.setEmail(updatedPerson.getEmail());
+	public void update(int id, Person person) {
+		jdbcTemplate.update("UPDATE Person SET name = ?, surname= ?, age= ?, email = ? WHERE id = ?",
+			person.getName(), person.getSurname(),person.getAge(), person.getEmail(), id);
 	}
 
-	public void delete(int id) {
-		peoples.removeIf(p -> p.getId()==id);
+	public void remove(int id) {
+		jdbcTemplate.update("DELETE FROM Person WHERE id = ?", id);
 		
 	}
 	
