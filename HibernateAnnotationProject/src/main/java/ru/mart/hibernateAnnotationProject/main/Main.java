@@ -81,9 +81,6 @@ public class Main {
 			addressService.add(address2);
 			personService.add(person);
 			personService.add(person2);
-		/*	carService.add(car);
-			carService.add(car1);
-			carService.add(car2);*/
 		} catch (SQLException e) {			
 			e.printStackTrace();
 		} finally {
