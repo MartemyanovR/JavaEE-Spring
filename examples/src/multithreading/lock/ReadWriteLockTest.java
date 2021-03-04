@@ -45,7 +45,7 @@ public class ReadWriteLockTest {
 		    try {
 		        System.out.println(map.get("foo"));
 		        try {
-					TimeUnit.SECONDS.sleep(1);
+					TimeUnit.SECONDS.sleep(2);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -55,7 +55,114 @@ public class ReadWriteLockTest {
 		};
 		executor.submit(readTask);
 		executor.submit(readTask);
-
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		executor.submit(readTask);
+		
 		stop(executor);
 	}
 	
@@ -63,7 +170,7 @@ public class ReadWriteLockTest {
 	public static void stop(ExecutorService executor) {
         try {
             executor.shutdown();
-            executor.awaitTermination(60, TimeUnit.SECONDS);
+            executor.awaitTermination(30, TimeUnit.SECONDS);
         }
         catch (InterruptedException e) {
             System.err.println("termination interrupted");

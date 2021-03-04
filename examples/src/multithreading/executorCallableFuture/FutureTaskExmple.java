@@ -12,7 +12,7 @@ import java.util.concurrent.TimeoutException;
  * пример использования FutureTask, в котором создается пул из 3-х потоков, 
  * реализующих интерфейс Callable в виде класса CallableDelay. 
  * Основная идея примера связана с проверками выполняемых потоков и 
- * wотмены выполнения задачи одного из потоков.
+ * отмены выполнения задачи одного из потоков.
  */
 public class FutureTaskExmple {
 	CallableDelay[] callable = null;
@@ -21,7 +21,7 @@ public class FutureTaskExmple {
 	private final int THREAD_COUNT = 3;
 
 //--------------------------------------------------------------------------------------------------------------------------	
-	class CallableDelay implements Callable<String>{
+	class CallableDelay implements Callable<String> {
      	 private  long  delay;
      	 private  int   idx  ;
      	 private  int   cycle;
@@ -42,13 +42,18 @@ public class FutureTaskExmple {
 			//В зависимости от значения идентификатора потока в методе call() 
 			//выполняется соответствующее количество циклов с заданной задержкой, после чего поток завершает работу.
 			while(cycle > 0) {
+				System.out.println("Cycle: " + cycle + " " + Thread.currentThread().getName());
 				TimeUnit.SECONDS.sleep(delay);
+				
 				cycle--;
 				//Второй поток на первом цикле прерывает выполнение 3-го потока вызовом метода cancel. 
-				if((idx == 2) && (cycle > 0))
-					futureTask[futureTask.length-1] .cancel(true);			
+				if((idx == 2) && (cycle > 0)) {
+					System.out.println("прерывание 3го потока...");
+					futureTask[futureTask.length-1] .cancel(true);	
+					
+				}
 			}
-			return "" + idx + ". " + Thread.currentThread().getName();
+			return " " + idx + ". " + Thread.currentThread().getName();
 		}		
 	}
 //--------------------------------------------------------------------------------------------------------------------------	
@@ -74,6 +79,7 @@ public class FutureTaskExmple {
 		public FutureTaskExmple ()  {
 			callable = new CallableDelay[THREAD_COUNT];
 			futureTask = new FutureTask[THREAD_COUNT];
+			int tempFirst = 0;
 			
 			// Сервис исполнения
 			executor = Executors.newFixedThreadPool(THREAD_COUNT);
@@ -89,7 +95,7 @@ public class FutureTaskExmple {
 			// В цикле выполняются различного рода проверки : 
 			//завершения работы потока методом isDone(), ожидания завершения потока методом get() 
 			//с временны́ми параметрами и отмены выполнения потока методом isCancelled().
-			while(true) {
+			while(true) {				
 				try {
 					if(areTasksDone()) {
 						// Завершение работы executor'а
@@ -100,12 +106,13 @@ public class FutureTaskExmple {
 					//TimeUnit.SECONDS.sleep(1);
 					// Проверка завершения выполнения задачи 1-м 
 	                // потоком
-					if(futureTask[0].isDone()) {
+					if(tempFirst == 0 && futureTask[0].isDone()) {
 						System.out.println("первый поток завершен" + futureTask[0].get());
+						tempFirst++;
 					}
-						 System.out.println("Ожидание завершения 2-го потока");
-						 String txt = futureTask[1].get(1000l,TimeUnit.MILLISECONDS);
-					if(txt!=  null)
+					System.out.println("Ожидание завершения 2-го потока");
+					String txt = futureTask[1].get(1000l,TimeUnit.MILLISECONDS);
+					if(txt !=  null)
 						System.out.println("2-ой поток завершен : " + txt);
 					System.out.println("Проверка завершения 3-го потока");
 					if(futureTask[2].isCancelled())
