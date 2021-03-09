@@ -24,8 +24,6 @@ public class PersonDao {
 	}
 	
 	public List<Person> index() {
-		jdbcTemplate.query("SELECT MAX(id) FROM PERSON",new PersonMapper(),COUNT);
-		System.out.println(COUNT);
 		return jdbcTemplate.query("SELECT * FROM Person", new BeanPropertyRowMapper<Person>(Person.class));
 	}
 	

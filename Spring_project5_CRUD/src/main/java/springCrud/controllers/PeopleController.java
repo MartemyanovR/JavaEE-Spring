@@ -57,7 +57,8 @@ public class PeopleController {
 	}	*/
 	//так же можно использовать @ModelAttribute
 	@GetMapping("/new")
-	public String newPerson(@ModelAttribute("person") Person person) {			
+	public String newPerson(@ModelAttribute("person") Person person) {
+		
 		return "/people/new";
 	}	
 	

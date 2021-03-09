@@ -10,14 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonController {
 
 	Repository repository = new Repository();	
-	
+
 	@GetMapping("/person")
 	public Person getPerson(@RequestParam(value = "name") String name) {
+		System.out.println(name);
 		return repository.personByName(name);
 	}
 	
-	@PostMapping("/person")
-	public Person update(@RequestParam(value = "name")String name,@RequestParam(value = "age") int age) {
+	@PostMapping
+	public Person update(@RequestParam(value = "name", required = true ) String name,
+							@RequestParam(value = "age", required = true) int age) {
 		Person person = repository.personByName(name);
 		if(person != null) {
 			person.setAge(age);
