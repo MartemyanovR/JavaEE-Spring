@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>Result expression: <%= new Calculation().calculate(5, 8, "+")  %></p>
+	<p>Result expression: <%= new Calculation().calculate(40, 8, "=")  %></p>
 </body>
 </html>

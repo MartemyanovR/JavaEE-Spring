@@ -2,13 +2,18 @@ package collectionsClass;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
 
 public class CollectionsAllMethods {
 
 	public static void main(String[] args) {
+		
+		List<String> listString = Arrays.asList("one","two","three","four","five","six");
+		
 		Cat catFox = new Cat("Fox", 5);
 		Cat catShurik = new Cat("Shurik", 6);
 		Cat catMuha = new Cat("Muha", 8);
@@ -46,9 +51,16 @@ public class CollectionsAllMethods {
 		List<Feline> felineListCheck = Collections.checkedList(listFel, Feline.class); //проверка типа, с <> работает так же
 		felineListCheck.add(catMuha);
 		System.out.println(felineListCheck.toString());
-		listFel.add((Feline)leon);
+//		listFel.add((Feline)leon);   //classCastException:
 		//felineListCheck.add((Feline)leon);
 		
+		System.out.println(Collections.disjoint(listCat, animalQue)); //true если коллекции не имеют общих элементов
+		@SuppressWarnings("unused")
+		Iterator<?>  iter = Collections.emptyIterator(); //возвращает пустой итератор https://coderoad.ru/26288670/Использование-emptyIterator-в-java
+		
+		Collections.fill(listString, "ten"); //заполняет все содержимое коллекции указаным обьектом
+		System.out.println(listString);
+		System.out.println(Collections.frequency(listCat,catFox)); //проверяет если уазаный обьект equals содержимого, возвращает количество совподений
 	}
 	
 

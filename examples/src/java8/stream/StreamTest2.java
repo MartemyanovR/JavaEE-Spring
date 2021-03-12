@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.IntStream;
@@ -42,7 +43,26 @@ public class StreamTest2 {
         
         Random random = new Random();
         random.ints().limit(10).sorted().forEach(x -> System.out.print(x +" "));
-
+        
+        //можно билдить переменные любых типов в поток
+        Stream s = Stream.builder().add(phoneStream).add("1").add(22).build();
+        s.forEach(System.out::println);
+        
+        System.out.println(
+        	    Stream.of(0, 2, 9, 13, 5, 11)
+        	    	.filter(x -> x % 2 == 1)
+        	        .count()
+        	);
+        
+        //reduce воозврощает optional
+        Optional<Integer> result = Stream.<Integer>empty()
+        	    .reduce((acc, x) -> acc + x);
+        	System.out.println(result.isPresent());
+        	
+        	double av = IntStream.range(1, 10)
+        		    .average()
+        		    .getAsDouble();
+        	System.out.println(av);
 	}
 
 }
