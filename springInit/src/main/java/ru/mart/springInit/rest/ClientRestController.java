@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ public class ClientRestController {
 	}
 	
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAuthority('Client:read')")
 	public Client getById(@PathVariable Long id) {
 		return listClients.stream().filter(client->client.getId().equals(id)).findFirst().orElse(null);
 	}
@@ -40,6 +42,7 @@ public class ClientRestController {
 	 * @return нового пользователя 
 	 */
 	@PostMapping
+	@PreAuthorize("hasAuthority('Client:write')")
 	public Client create(@RequestBody Client client) {
 		this.listClients.add(client);
 		return client;
@@ -50,6 +53,7 @@ public class ClientRestController {
 	 * @param id идентификатор клиента
 	 */
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAuthority('Client:write')")
 	public void deleteClient(@PathVariable Long id) {
 		this.listClients.removeIf(client->client.getId().equals(id));
 	}

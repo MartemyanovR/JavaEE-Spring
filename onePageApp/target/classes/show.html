@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>		
+</head>
+<body>
+	<div th:if="${not #lists.isEmpty(lists)}">
+		<table class="tg">
+			<tr>
+				<th width="80">ID</th>
+				<th width="120">Model</th>
+				<th width="120">Car Body</th>
+				<th width="120">Price</th>				
+			</tr>			
+			<tr th:each="car : ${cars}">
+				<td th:text="${car.getId()}"/>
+				<td th:text="${car.getModel()}"/>
+				<td th:text="${car.getCarBody()}"/>
+				<td th:text="${car.getPrice()/100}.${car.getPrice()%100}"/>	
+			</tr>				
+		</table>
+	</div>
+</body>
+</html>

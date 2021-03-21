@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>  
+</head>
+<body>
+
+<a th:href="@{/greeting}">Back to start menu</a>
+
+	<br/>
+	<br/>
+	
+	<div th:if="${not #lists.isEmpty(lists)}">
+		<table class="tg">
+			<tr>
+				<th width="80">ID</th>
+				<th width="120">Model</th>
+				<th width="120">Car Body</th>
+				<th width="120">Price</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>			
+			<tr th:each="car : ${cars}">
+				<td th:text="${car.getId()}"/>
+				<td th:text="${car.getModel()}"/>
+				<td th:text="${car.getCarBody()}"/>
+				<td th:text="${car.getPrice()/100}.${car.getPrice()%100}"/>	
+				<td><a th:href="@{/edit/{id}(id=${car.getId()})}">Edit</a></td>
+				<td><a th:href="@{/remove/{id}(id=${car.getId()})}">Delete</a></td>
+			</tr>				
+		</table>
+	</div>
+	
+	<br/>
+		
+	<h1>Add car</h1>
+	
+	<div>
+		<form th:action="@{/add}" th:object="${car}" th:method="post">
+			<div th:if="${car != null}">
+				<label for="id" hidden="true">ID</label>
+				<input type="text" th:field="*{id}" id="id" readonly="readonly">
+			</div>
+			<br />
+			<label for="model">Enter model</label>
+			<input type="text" th:field="*{model}" id="model"/>	
+			<br/>
+			<label for="carBody">Enter car body</label>
+			<input type="text" th:field="*{carBody}" id="carBody"/>	
+			<br/> 	
+			<label for="price">Enter car price</label>
+			<input type="text" th:field="*{price}" id="price"/>	
+			<br/>			
+			<div th:if="${car != null}">
+				<input type="submit" value="Edit">
+			</div>
+			<div th:unless="${car == null}">
+				<input type="submit" value="Create">
+			</div>					
+		</form>
+	</div>
+	
+	
+	
+	
+	
+	
+
+</body>
+</html>
