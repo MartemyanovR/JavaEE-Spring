@@ -7,23 +7,22 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import carsManager.model.Car;
 
+
 @Repository
-public class CarDAOImpl  implements CarDAO{
-	private static final Logger logger = LoggerFactory.getLogger(CarDAOImpl.class);
+public class CarDaoImpl implements CarDao {
+	private static final Logger logger = LoggerFactory.getLogger(CarDaoImpl.class);
 	
 	private SessionFactory sessionFactory;
 	
+	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}	
-
-	public CarDAOImpl() {
-		
-	}
 
 	@Override
 	public void addCar(Car car) {
@@ -62,8 +61,10 @@ public class CarDAOImpl  implements CarDAO{
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Car> getListCars() {
-		Session session = this.sessionFactory.getCurrentSession();
-		List<Car> carList = session.createQuery("FROM CAR").list();
+		
+		Session session = sessionFactory.openSession();
+		session = this.sessionFactory.getCurrentSession();
+		List<Car> carList = session.createQuery("FROM Car").list();
 		
 		for(Car car : carList) {
 			logger.info("Car details: " + car);

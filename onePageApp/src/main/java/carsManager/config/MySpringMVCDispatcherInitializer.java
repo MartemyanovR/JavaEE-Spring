@@ -2,7 +2,7 @@ package carsManager.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class MySpringMVCDispatcherInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
+public class MySpringMVCDispatcherInitializer  extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {		

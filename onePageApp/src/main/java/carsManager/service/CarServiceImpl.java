@@ -3,20 +3,20 @@ package carsManager.service;
 import java.util.List;
 
 import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import carsManager.dao.CarDAO;
+import carsManager.dao.CarDao;
 import carsManager.model.Car;
 
-@Service
-public class CarServiceImpl implements CarService {
+@Component
+public class CarServiceImpl implements CarService {	
 	
-	private CarDAO carDao;
+	private CarDao carDao;	
 	
-
-	public CarServiceImpl() {
-	}
-	
-	public void setCarDao(CarDAO carDao) {
+	@Autowired(required = false)
+	public void setCarDao(CarDao carDao) {
 		this.carDao = carDao;
 	}
 

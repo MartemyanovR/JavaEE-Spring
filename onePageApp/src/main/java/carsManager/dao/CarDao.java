@@ -4,7 +4,7 @@ import java.util.List;
 
 import carsManager.model.Car;
 
-public interface CarDAO {
+public interface CarDao {
 	
 	public void addCar(Car car);
 	

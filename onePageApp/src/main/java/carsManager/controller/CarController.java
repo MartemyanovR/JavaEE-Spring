@@ -10,30 +10,31 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import antlr.collections.List;
 import carsManager.model.Car;
 import carsManager.service.CarService;
-import carsManager.service.CarServiceImpl;
 
 @Controller
 @RequestMapping
 public class CarController {
 	
-	private CarServiceImpl carService;	
+	private CarService carService;	
 	
-	@Autowired(required = true)
-	public void setCarService(@Qualifier(value="carService") CarServiceImpl carService) {
+	@Autowired(required = false)
+	public void setCarService(CarService carService) {
 		this.carService = carService;
 	}
 
 	//приветствие
-	@GetMapping("/greeting")
+	@GetMapping()
 	public String greeting( Model model) {
 	
 		return "index";
 	}	
 	
-	@GetMapping
+	@GetMapping("/cars")
 	public String listCars(Model model) {
+		model.addAttribute("car", new Car());
 		model.addAttribute("cars", carService.getListCar());
 	
 		return "cars";

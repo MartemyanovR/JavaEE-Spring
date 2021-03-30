@@ -1,6 +1,8 @@
 package generics.ekkel.genericMethod;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class InvokeMethInMeth {
@@ -17,12 +19,21 @@ public class InvokeMethInMeth {
 		System.out.println("Work_g");
 	}
 	
+	public static void addList(List list, Object ob) {
+		list.add(ob);
+	}
+	
 
 	public static void main(String[] args) {
 		
 		InvokeMethInMeth.f(new HashMap<String,Integer>());
 		InvokeMethInMeth.f(InvokeMethInMeth.createMap());
 		InvokeMethInMeth.g(InvokeMethInMeth.createMap());
+		
+		List<String> listS = new ArrayList<>();
+		InvokeMethInMeth.addList(listS, new Object());   //heap pollution
+		String str = listS.get(0);   //ClassCastException:
+		
 	}
 
 }
