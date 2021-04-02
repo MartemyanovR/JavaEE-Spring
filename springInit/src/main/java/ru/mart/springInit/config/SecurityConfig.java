@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import ru.mart.springInit.model.Permission;
@@ -28,8 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	private final UserDetailsService userDetailsService;
 	
-	@Autowired	
-	public SecurityConfig(@Qualifier("userDetailServiceImpl") UserDetailsService userDetailsService) {
+	@Autowired						  
+	public SecurityConfig(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
 	}
 
@@ -58,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.permitAll();
 		
 	}
+	
 	
 /*    // при хранении пользователя в оперативной памяти 
 	@Bean

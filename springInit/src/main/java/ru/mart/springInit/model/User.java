@@ -2,6 +2,8 @@ package ru.mart.springInit.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,8 +29,10 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	@Column(name = "ROLE")
+	@Enumerated(value = EnumType.STRING)
 	private Role role;
 	@Column(name = "STATUS")
+	@Enumerated(value = EnumType.STRING)
 	private Status status;
 	
 }

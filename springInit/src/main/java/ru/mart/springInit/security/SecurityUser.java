@@ -11,6 +11,9 @@ import lombok.Data;
 import ru.mart.springInit.model.Status;
 import ru.mart.springInit.model.User;
 
+/*
+ * Создаем собственного пользователя вместо User из inMemory
+ */
 @Data
 public class SecurityUser implements UserDetails  {
 	

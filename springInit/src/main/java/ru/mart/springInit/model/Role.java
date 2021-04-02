@@ -23,7 +23,8 @@ public enum Role {
 	}
 	
 	/**
-	 * Конвертируем наши разрешения, в класс SimpleGrantedAuthority 
+	 * Конвертируем наши разрешения, в класс SimpleGrantedAuthority,
+	 *  т.е на основании роли возвращаем GrantedAuthority
 	 * @return Set преобразованных permission 
 	 */
 	public Set<SimpleGrantedAuthority> getAuthority() {		
