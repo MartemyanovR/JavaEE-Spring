@@ -69,7 +69,7 @@ public class SecurityUser implements UserDetails  {
 		return isActive;
 	}
 
-	public static UserDetails fomUser(User user) {
+	public static UserDetails fromUser(User user) {
 
 		return new org.springframework.security.core.userdetails.User(
 			user.getEmail(),

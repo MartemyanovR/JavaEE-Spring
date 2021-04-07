@@ -5,6 +5,8 @@ public class EnumEmployeeTest {
 	public static void main(String[] args) {
 		EnumEmployee EE;
 		
+		System.out.println(EnumEmployee.A.name());
+		
 		System.out.println("Employee two - " + EnumEmployee.B.getEmployee());
 		
 		System.out.println("All employee:");

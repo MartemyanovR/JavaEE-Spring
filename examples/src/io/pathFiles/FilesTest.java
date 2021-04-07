@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URISyntaxException;
 import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,7 +22,7 @@ public class FilesTest {
 
 	
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, URISyntaxException {
 	
 		byte[] b = {32,76,56,45,120,11,90};
 		ByteArrayInputStream is = new ByteArrayInputStream(b);
@@ -33,7 +34,13 @@ public class FilesTest {
 			Files.deleteIfExists(testFile);
 		}
 		Path target = Paths.get("C:\\eclipse-workspace\\FFF.txt");
-/*		
+		
+		//возвращаем масссив байт из файла
+		String message = new String(Files.readAllBytes(
+				Paths.get(ClassLoader.getSystemResource("C:\\eclipse-ee\\readme.txt").toURI())));
+		System.out.println(message);
+		
+		/*		
 	//	Files.move(testFile, target, REPLACE_EXISTING);
 	//	Files.copy(testFile, target);
 		//копируем данные из входного потока в файл (файл создаеется атоматически) 
